@@ -1,0 +1,174 @@
+.page-go-book {
+  width: 100vw;
+
+  .page-header {
+    width: 100%;
+    background-color: #fff;
+    .book-type {
+      height: 50px;
+      .book-type-main {
+        padding: 0px 15px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        li {
+          width: 68px;
+          height: 28px;
+          border-radius: 20px;
+          width: 68px;
+          height: 28px;
+          background: #f6f7fa;
+          border-radius: 20px;
+          font-size: 13px;
+          font-family: PingFangSC, PingFangSC-Regular;
+          font-weight: 400;
+          text-align: center;
+          color: #888888;
+          line-height: 28px;
+          margin-right: 20px;
+
+          &:last-child {
+            margin-right: 0px;
+          }
+        }
+
+        .bookActive {
+          font-weight: 500;
+          color: #ed6d38;
+          background: rgba(219, 107, 58, 0.10);
+        }
+      }
+    }
+
+  }
+
+  .book-list {
+    margin-top: 10px;
+    background: #ffffff;
+
+    .book-list-main {
+      padding: 0px 15px;
+
+      .list-title {
+        padding: 12px 0px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .left {
+          font-size: 14px;
+          font-family: PingFangSC, PingFangSC-Regular;
+          font-weight: 400;
+          text-align: justify;
+          color: #db6b3a;
+          line-height: 20px;
+          .iconfont{
+            font-size: 8px;
+            padding-top: 1px;
+          }
+        }
+      }
+
+      .magazine-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        dl {
+          width: 165px;
+          padding-bottom: 20px;
+          dt {
+            img {
+              width: 165px;
+              height: 165px;
+            }
+          }
+          dd {
+            padding-top: 8px;
+            .title {
+              font-size: 14px;
+              font-weight: 500;
+              text-align: left;
+              color: #333333;
+              line-height: 20px;
+            }
+            p {
+              display: none;
+            }
+            .base {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding-top: 16px;
+              .dd-l {
+                display: flex;
+                align-items: center;
+
+                .price {
+                  font-size: 18px;
+                  font-weight: 500;
+                  text-align: left;
+                  color: #ed6d38;
+                  line-height: 18px;
+                }
+
+                .original {
+                  font-size: 10px;
+                  font-weight: 400;
+                  text-align: left;
+                  color: #b2b2b2;
+                  line-height: 12px;
+                  margin-left: 4px;
+                  text-decoration: line-through;
+                }
+              }
+
+              .dd-r {
+                .icon-gouwucheman {
+                  color: #ed6d38;
+                }
+
+              }
+            }
+
+          }
+        }
+      }
+
+      .two {
+        dl {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          dt {
+            img {
+              width: 140px !important;
+              height: 140px !important;
+            }
+          }
+
+          dd {
+            width: 188px;
+            padding-top: 4px;
+            .title {
+              letter-spacing: 1px;
+            }
+
+            p {
+              display: block;
+              font-size: 12px;
+              font-weight: 400;
+              color: #999999;
+              line-height: 12px;
+              padding-top: 12px;
+            }
+            .base{
+              padding-top: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
