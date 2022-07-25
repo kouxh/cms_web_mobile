@@ -1,8 +1,10 @@
 .page-catalogue-id {
   width: 100vw;
+
   .page-header {
     width: 100%;
     background-color: #fff;
+
     .select-box {
       padding: 0px 15px;
       display: flex;
@@ -34,6 +36,7 @@
             line-height: 22px;
             letter-spacing: 0.34px;
           }
+
           .select_img_rotate {
             transform: rotate(180deg);
             transition: transform 0.25s, -webkit-transform 0.25s,
@@ -45,10 +48,15 @@
           position: relative;
           box-shadow: 0 2px 8px 0 rgb(200 201 204 / 50%);
           width: 100%;
+          max-height: 300px;
           z-index: 2000;
           background-color: #fff;
           border-radius: 3px;
           font-size: 14px;
+          scrollbar-width: none; /// firefox /
+          -ms-overflow-style: none; /// IE 10+ */
+          overflow-x: hidden;
+          overflow-y: auto;
 
           li {
             background-color: #fff;
@@ -233,6 +241,7 @@
   .way-content {
     background-color: #fff;
     padding-bottom: 10px;
+
     .way-content-main {
       padding: 0px 15px;
 
@@ -284,10 +293,12 @@
           border-radius: 6px;
           margin-bottom: 16px;
           position: relative;
-          &:last-child{
+
+          &:last-child {
             margin-bottom: 0px;
           }
-          .yh{
+
+          .yh {
             width: 60px;
             height: 60px;
             position: absolute;
@@ -295,6 +306,7 @@
             right: 10px;
             z-index: 9;
           }
+
           .type-item-main {
             padding: 20px 10px;
             position: absolute;
@@ -305,6 +317,7 @@
               font-weight: 500;
               color: #333333;
               line-height: 24px;
+              height: 48px;
             }
 
             .author {
@@ -331,5 +344,7 @@
       }
     }
   }
+
+
 
 }

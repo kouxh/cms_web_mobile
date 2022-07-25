@@ -420,15 +420,15 @@ export default {
     },
 
     //跳转到详情
-    detailsFn() {
-      this.$router.push({
-        name: "catalogue-zz",
-        query: { id: this.magazineId },
-        // params: {
-        //   type: item,
-        // },
-      });
-    },
+    // detailsFn() {
+    //   this.$router.push({
+    //     name: "catalogue-zz",
+    //     query: { id: this.magazineId },
+    //     // params: {
+    //     //   type: item,
+    //     // },
+    //   });
+    // },
     //点击购买按钮
     buyFn() {
       //判断是否登录

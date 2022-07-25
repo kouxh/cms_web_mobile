@@ -3,51 +3,41 @@
     <Header />
     <div class="zz-info">
       <van-swipe @change="onChange" :height="375" class="my-swipe">
-        <!-- <van-swipe-item v-for="(image, index) in bookData.mas_book_img" :key="index"> <img v-lazy="image" /></van-swipe-item>
+        <van-swipe-item v-for="(image, index) in magazineDetails.mas_magazine_img" :key="index"> <img v-lazy="image" /></van-swipe-item>
         <template #indicator>
-          <div class="custom-indicator">{{ current + 1 }}/{{bookData.mas_book_img.length}}</div>
-        </template> -->
-        <van-swipe-item>1</van-swipe-item>
-        <van-swipe-item>2</van-swipe-item>
-        <van-swipe-item>3</van-swipe-item>
-        <van-swipe-item>4</van-swipe-item>
-        <template #indicator>
-          <div class="custom-indicator">{{ current + 1 }}/4</div>
+          <div class="custom-indicator">{{ current + 1 }}/{{magazineDetails.mas_magazine_img.length}}</div>
         </template>
       </van-swipe>
       <div class="price-box">
-        <div class="original">¥{{ bookData.mas_book_price }}</div>
-        <div class="present">¥{{ bookData.mas_book_o_price }}</div>
+        <div class="original">¥{{checkedPrice}}</div>
+        <div class="present">¥45.67</div>
         <div class="present">8.2折</div>
       </div>
-      <h2>{{ bookData.mas_book_name }}</h2>
+      <h2>{{magazineDetails.mas_magazine_title_main}}</h2>
+    </div>
+    <div class="zz-sku">
+      <h2>订阅规格</h2>
+      <div class="type-box">
+        <button :class="priceCurrent == 1 ? 'active' : ''" @click="onSelect(1,magazineDetails.mas_magazine_flat)">平装：{{magazineDetails.mas_magazine_flat}}</button>
+        <button :class="priceCurrent == 2 ? 'active' : ''" @click="onSelect(2,magazineDetails.mas_magazine_electronics)">电子刊：{{magazineDetails.mas_magazine_electronics}}</button>
+      </div>
     </div>
     <div class="zz-introduce">
-      <p>杂志名称：{{ bookData.mas_book_name }}</p>
-      <p>出版周期：{{ bookData.mas_magazine_publication_cycle }}</p>
+      <p>杂志名称：{{magazineDetails.mas_magazine_title_main}}</p>
+      <p>出版周期：{{magazineDetails.mas_magazine_publication_cycle}}</p>
       <p>
-        {{ bookData.mas_book_describe }}
+        {{magazineDetails.mas_magazine_notes}}
       </p>
     </div>
     <div class="comment-box">
       <div class="top-title">
         <div class="top-title-l">
           <h2>用户评价</h2>
-          <span>({{ commentList.length }})</span>
+          <span>({{commentList.length}})</span>
         </div>
       </div>
       <ul class="comment-list" v-if="commentList.length > 0">
-        <li v-for="(item, index) in commentList" :key="index">
-          <div class="li-l">
-            <img :src="item.mas_user_header_img" alt="" />
-            <img class="vip-icon" src="@/static/images/vip-icon.png" alt="" />
-          </div>
-          <div class="li-r">
-            <span class="name">{{ item.mas_user_name }}</span>
-            <p>{{ item.mas_book_comment }}</p>
-          </div>
-        </li>
-        <!-- <li>
+        <li>
           <div class="li-l">
             <img src="@/static/images/user-photo.png" alt="" />
             <img
@@ -62,7 +52,23 @@
               书籍收到了，学习到很多管理会计类的知识，发货很快，商品和描述一致，很好很值得购买，会回购推荐的
             </p>
           </div>
-        </li> -->
+        </li>
+        <li>
+          <div class="li-l">
+            <img src="@/static/images/user-photo.png" alt="" />
+            <img
+              class="vip-icon"
+              src="../../static/images/vip-icon.png"
+              alt=""
+            />
+          </div>
+          <div class="li-r">
+            <span class="name">谢莎莎</span>
+            <p>
+              书籍收到了，学习到很多管理会计类的知识，发货很快，商品和描述一致，很好很值得购买，会回购推荐的
+            </p>
+          </div>
+        </li>
       </ul>
       <div class="more" v-if="commentList.length > 3">
         <span>{{ commentMore == false ? "查看更多" : "收起" }}</span>
@@ -83,12 +89,12 @@
         <dl
           v-for="(item, index) in recommend"
           :key="index"
-          @click="BookDetails(item.mas_book_id)"
+          @click="zzDetails(item.mas_magazine_id)"
         >
           <dt>
-            <img :src="item.mas_book_img" alt="" />
+            <img :src="item.mas_magazine_master_img" alt="" />
           </dt>
-          <dd>{{ item.mas_book_name }}</dd>
+          <dd>{{ item.mas_magazine_title_main }}</dd>
         </dl>
         <!-- <dl>
           <dt>
@@ -110,7 +116,7 @@
           <h2>图文详情</h2>
         </div>
       </div>
-      <div class="image-box" v-html="bookData.mas_book_content">
+      <div class="image-box" v-html="magazineDetails.mas_magazine_text">
         <!-- <img src="" alt="" /> -->
       </div>
     </div>
@@ -133,47 +139,70 @@ export default {
   layout: "not",
   data() {
     return {
-      current: 0, //当前轮播图索引
-      commentList: [], //书评论数据列表
-      commentMore: false, //是否查看评论更多
-      bookData: "", //书详情数据
-      recommend: [], //书推荐
-      meau: {}, //导航信息
+      current: 0,//轮播图默认
+      commentList: [], //评论列表
+      commentMore: false, //是否查看收藏更多
+      magazineDetails: "", //杂志详情数据
+      recommend: [], //杂志推荐
+      priceCurrent:1,//1是平装2是电子刊
+      checkedPrice:'',//选中价格
     };
   },
-  head() {},
+   head() {
+    return {
+      title: "《管理会计研究》杂志_新技术 • 新实践 • 新理念-管理会计研究",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "《管理会计研究》杂志涵盖管理会计理论与案例实践，包揽前沿技术应用与数字驱动业务创新，浓缩为一本专业、深度、有实战意义的杂志，让你一书尽揽管理智慧、一站get转型借鉴与指导。",
+        },
+      ],
+    };
+  },
 
+  computed: {},
   async asyncData({ $axios, store, params }) {
     let res = await $axios.notNeedlogin({
-      className: "BookController",
-      classMethod: "getBookDetails",
+      className: "MagazineController",
+      classMethod: "getMagazineDetails",
       data: {
-        bookId: parseInt(params.id),
+        magazineId: parseInt(params.id),
       },
     });
+    console.log(res, "读杂志详情");
     if (res.bol) {
       return {
-        bookData: res.data.bookData,
-        commentList: res.data.bookComment,
-        recommend: res.data.recommend.list,
-        meau: res.data.recommend.menu,
+        magazineDetails: res.data.magazineDetails,
+        commentList: res.data.magazineComment,
+        recommend: res.data.recommend,
       };
     }
   },
-  computed: {},
   created() {},
-  mounted() {},
+  mounted() {
+    this.checkedPrice=this.magazineDetails.mas_magazine_flat;
+  },
   methods: {
     //轮播图切换
     onChange(index) {
       this.current = index;
     },
-    //点击到详情
-    BookDetails(id) {
+     //点击到详情
+    zzDetails(id) {
       this.$router.push({
-        path: `/gsd/${id}`,
-
+        path: `/dzz/${id}`,
+        // name: "",
+        // query: { id: index, type: item },
+        // params: {
+        //   type: item,
+        // },
       });
+    },
+    //点击购买类型
+    onSelect(index,price) {
+      this.priceCurrent = index;
+      this.checkedPrice=price;
     },
   },
 };

@@ -1,29 +1,36 @@
-@bgcolor:#f7f7f7;
+@bgcolor: #f7f7f7;
 @font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
   'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
   'Noto Color Emoji';
 
-body{
+body {
   background-color: @bgcolor;
-  font-family: @font-family !important;
-  // font-size: 36px;
-  // margin: 0;
+  font-family: @font-family  !important;
+  -webkit-font-smoothing: antialiased;
 }
-// html {overflow: hidden;height: 100%;}
 
-a{
+a {
   color: #333;
   text-decoration: none;
 }
 
 
-h1, h2, h3, h4, h5, h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-bottom: 0px;
 }
 
-ol, ul, dl,dd {
+ol,
+ul,
+dl,
+dd {
   margin-bottom: 0px;
 }
+
 /* 单行溢出 */
 .oneline {
   overflow: hidden;
@@ -40,6 +47,16 @@ ol, ul, dl,dd {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
+
+.threeline {
+  display: -webkit-box !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
 .fourline {
   display: -webkit-box !important;
   overflow: hidden;
@@ -48,6 +65,7 @@ ol, ul, dl,dd {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
 }
+
 .fifiveline {
   display: -webkit-box !important;
   overflow: hidden;
@@ -56,37 +74,46 @@ ol, ul, dl,dd {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;
 }
+
 img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-button{
+
+button {
   cursor: pointer;
 }
 
 /* 页面渐入渐出动画 */
-.page-enter-active, .page-leave-active {
+.page-enter-active,
+.page-leave-active {
   transition: opacity .5s;
 }
 
-.page-enter, .page-leave-active {
+.page-enter,
+.page-leave-active {
   opacity: 0;
 }
 
 
-.test-enter-active, .test-leave-active {
+.test-enter-active,
+.test-leave-active {
   transition: opacity .5s;
 }
-.test-enter, .test-leave-active {
+
+.test-enter,
+.test-leave-active {
   opacity: 0;
 }
+
 // 中间盒子的高度
-.main_container{
+.main_container {
   padding-top: 121px;
   min-height: 700px;
   background-color: #f7f8fa;
 }
+
 //图片左上角
 .point {
   position: absolute;
@@ -104,15 +131,19 @@ button{
   letter-spacing: 0.7px;
   border-top-left-radius: 6px;
 }
+
 .clear {
   clear: both;
 }
+
 .radio-group {
   display: flex;
+
   .radio-box {
     display: flex;
     align-items: center;
     margin-right: 20px;
+
     label {
       margin-left: 10px;
       font-size: 14px;
@@ -120,10 +151,12 @@ button{
       color: rgba(0, 0, 0, 0.85);
       line-height: 14px;
     }
+
     input[type="checkbox"] {
       cursor: pointer;
       position: relative;
     }
+
     input[type="checkbox"]::after {
       position: absolute;
       top: 0;
@@ -162,12 +195,14 @@ button{
     }
   }
 }
+
 @-webkit-keyframes fadeInDown {
   0% {
     opacity: 0;
     -webkit-transform: translateY(-10px);
     transform: translateY(-10px);
   }
+
   100% {
     opacity: 1;
     -webkit-transform: translateY(0);
@@ -182,6 +217,7 @@ button{
     -ms-transform: translateY(-20px);
     transform: translateY(-20px);
   }
+
   100% {
     opacity: 1;
     -webkit-transform: translateY(0);
@@ -190,4 +226,33 @@ button{
   }
 }
 
+//无数据样式
+.no-data-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 
+  img {
+    width: 70%;
+    height: 180px;
+  }
+
+  .tip {
+    margin-top: 22px;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    color: #666;
+    line-height: 22px;
+    padding-bottom: 20px;
+  }
+}
+
+//加载样式
+.loading-box {
+  margin: 0 auto;
+  padding: 150px 0px;
+  display: flex;
+  justify-content: center;
+}

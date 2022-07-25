@@ -6,14 +6,19 @@
     background-color: #fff;
     .book-type {
       height: 50px;
+      width: 345px;
+      margin: 0 auto;
       .book-type-main {
-        padding: 0px 15px;
+        // padding: 0px 15px;
         height: 100%;
         display: flex;
         align-items: center;
-
+        displey:-webkit-flex;
+        -webkit-flex-flow:row nowrap; //设置排列方式为横向排列，并且超出元素不换行
+        flex-flow:row nowrap;
+        overflow-x: auto;
         li {
-          width: 68px;
+          min-width: 68px;
           height: 28px;
           border-radius: 20px;
           width: 68px;
@@ -42,7 +47,9 @@
     }
 
   }
-
+  ::-webkit-scrollbar {
+    display: none;
+  }
   .book-list {
     margin-top: 10px;
     background: #ffffff;

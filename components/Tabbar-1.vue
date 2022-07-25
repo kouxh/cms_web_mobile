@@ -1,28 +1,29 @@
 <template>
   <div class="sub-header">
     <div class="tabs-box">
-      <div class="tabs-pre" @click="preFn()" v-if="currentClickNumber > 0">
+      <!-- <div class="tabs-pre" @click="preFn()" v-if="currentClickNumber > 0">
         <i class="iconfont icon-icon-xiangyouhuadong"></i>
-      </div>
+      </div> -->
       <!-- <ul class="tabs" ref="tabsRef" id="scroller"> -->
       <van-tabs
         v-model="activeIndex"
-        @change="tabsFn"
         color="#ff8556"
         line-width="20"
         class="tabsList"
         ref="tabsRef"
+        @click="oNitem"
       >
         <van-tab
-          v-for="(item, index) in tabs"
+          v-for="(item, index) in tabList"
           :key="index"
-          :title="item"
+          :title="item.mas_menu_name"
+          :name="item.mas_menu_url"
         ></van-tab>
       </van-tabs>
       <!-- </ul> -->
-      <div class="tabs-next" @click="nextFn()" v-if="nextIcon">
+      <!-- <div class="tabs-next" @click="nextFn()" v-if="nextIcon">
         <i class="iconfont icon-icon-xiangyouhuadong"></i>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -30,22 +31,32 @@
 export default {
   data() {
     return {
-      tabs: [
-        "听课程",
-        "找方法",
-        "学案例",
-        "见大咖",
-        "读杂志",
-        "逛书店",
-        "淘资讯",
-        "看专题",
-      ],
-      activeIndex: this.$store.state.tabIndex ? this.$store.state.tabIndex : 1,
+      activeIndex: this.$store.state.subTabId ? this.$store.state.subTabId : "",
       nextIcon: true,
       currentClickNumber: 0,
+      tabList: [], //菜单栏列表
     };
   },
-  created() {},
+  async fetch() {
+    let res = await this.$axios.notNeedlogin({
+      className: "NavigationController",
+      classMethod: "getLeftNavigation",
+    });
+    if (res.bol) {
+      this.tabList = res.data;
+    }
+  },
+  //监听路由变化使导航高亮
+  watch: {
+    $route(to, from) {
+      if(to.query.menuId!=from.query.menuId){
+        this.activeIndex=to.name;
+        this.$store.commit("setSubTabId", to.name);
+      }
+    },
+  },
+  created() {
+  },
   computed: {},
   mounted() {
     // this.$refs.tabsRef.addEventListener("scroll", (event) => {
@@ -74,20 +85,26 @@ export default {
       const currentScrollWidth = document.querySelector(".tabs").clientWidth;
       const canNumber = Math.floor(currentScrollWidth / 70); //可以放下的个数
       //如果最后一个流程图标已经展示出来，则停止滚动
-      if (this.currentClickNumber + canNumber >= this.tabs.length - 1) {
+      if (this.currentClickNumber + canNumber >= this.tabList.length - 1) {
         this.nextIcon = false;
         return;
       }
     },
     //点击tabs
-    tabsFn(index) {
-      this.activeIndex = index;
-      this.$store.commit("setTabIndex", index);
+    oNitem(url) {
       document.body.scrollTop = 0;
-      if (index > 4) {
-        this.nextIcon = false;
-        this.currentClickNumber = 1;
-      }
+      this.$store.commit("setSubTabId", url);
+      let menuItem = this.tabList.find((c) => c.mas_menu_url == url);
+      this.$router.push({
+        name: url,
+        query: {
+          menuId: menuItem.mas_menu_id,
+        },
+      });
+      // if (index > 4) {
+      //   this.nextIcon = false;
+      //   this.currentClickNumber = 1;
+      // }
 
       // let divBoxWidth = document.querySelector(".van-tab--active").clientWidth;
       // let spanLeft =
@@ -111,40 +128,6 @@ export default {
       //   scrollBox.scrollLeft += -divBoxWidth;
       //   this.currentClickNumber += 1;
       // }
-
-      if (index == 0) {
-        this.$router.push({
-          name: "index",
-        });
-      } else if (index == 1) {
-        this.$router.push({
-          name: "zff",
-        });
-      } else if (index == 2) {
-        this.$router.push({
-          name: "xal",
-        });
-      } else if (index == 3) {
-        this.$router.push({
-          name: "jdk",
-        });
-      } else if (index == 4) {
-        this.$router.push({
-          name: "zz",
-        });
-      } else if (index == 5) {
-        this.$router.push({
-          name: "gsd",
-        });
-      } else if (index == 6) {
-        this.$router.push({
-          name: "tzx",
-        });
-      }else if (index == 7) {
-        this.$router.push({
-          name: "kzt",
-        });
-      }
     },
     //点击向前
     preFn() {
@@ -153,25 +136,21 @@ export default {
       // scrollBox.scrollLeft = 0;
       // console.log(scrollBox.scrollLeft,'--')
       if (this.currentClickNumber > 0) {
-
         this.currentClickNumber -= 1;
         this.nextIcon = true;
         let scrollBox = document.querySelector(".tabsList");
-         console.log(scrollBox,scrollBox.scrollLeft,'--')
+        console.log(scrollBox, scrollBox.scrollLeft, "--");
         scrollBox.scrollLeft = 0;
-
       } else {
-         console.log('---=')
+        console.log("---=");
         return false;
       }
     },
     //点击下一个
     nextFn() {
-
-
-        let scrollBox = document.querySelector(".tabsList");
-         console.log(scrollBox,scrollBox.scrollLeft,'-44-')
-         scrollBox.scrollLeft = 1000;
+      let scrollBox = document.querySelector(".tabsList");
+      console.log(scrollBox, scrollBox.scrollLeft, "-44-");
+      scrollBox.scrollLeft = 1000;
 
       // let currentScrollWidth = document.querySelector(".tabs").clientWidth;
       // let canNumber = Math.floor(currentScrollWidth / 70); //可以放下的个数
@@ -202,9 +181,6 @@ export default {
   font-weight: 400;
   color: #666666;
   line-height: 16px;
-  &:nth-child(1){
-    display: none;
-  }
 }
 /deep/.van-tab--active {
   font-weight: 600;

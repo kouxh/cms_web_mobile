@@ -2,8 +2,8 @@
 export const state = () => ({
   token: '',//后台返回token
   userName: 'admin',
-  headerWidth: '1100px',//默认宽度
-  tabIndex:'',//tab菜单栏默认选中项
+  secretKey: "mas20220520",//秘钥
+  subTabId: '',//二级菜单选中项id
 })
 export const mutations = {
   setToken(state, token) {
@@ -17,18 +17,17 @@ export const mutations = {
     state.userInfo = userInfo;
     this.$cookies.set('userInfo', userInfo)
   },
-  setHeaderWidth(state, data) {
-    state.headerWidth = data
-  },
-  setTabIndex(state, data) {
-    state.tabIndex = data
-    this.$cookies.set('tabIndex',data)
-  },
+
+  setSubTabId(state, data) {
+    state.subTabId = data
+    this.$cookies.set('subTabId', data)
+  }
 }
 export const actions={
   nuxtServerInit(store,content){
     //store:vuex上下文 content:nuxt上下文
     // store.commit('setToken','admin');
-    store.commit('setTabIndex',this.$cookies.get('tabIndex'));
+    store.commit('setSubTabId', this.$cookies.get('subTabId'));
+    console.log(store.state.subTabId, 'nuxtServerInit')
   }
 }

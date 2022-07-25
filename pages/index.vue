@@ -2,58 +2,56 @@
   <div class="page-home">
     <Header />
     <div class="home-advert">
-      <img src="" alt="" />
+      <img :src="indexData.bannel[0].mas_banner_img" alt="" />
     </div>
     <div class="home-column">
       <div class="home-column-main">
         <div class="column-box">
-          <dl class="item-column">
+          <dl
+            class="item-column"
+            v-for="(item, index) in tabList"
+            :key="index"
+            @click="oNitem(item)"
+          >
             <dt>
-              <img src="../static/images/icon-kt.png" alt="" />
+              <img
+                v-if="item.mas_menu_name == '找方法'"
+                src="../static/images/icon-way.png"
+                alt=""
+              />
+              <img
+                v-else-if="item.mas_menu_name == '大咖说'"
+                src="../static/images/icon-kt.png"
+                alt=""
+              />
+              <img
+                v-else-if="item.mas_menu_name == '读杂志'"
+                src="../static/images/icon-zz.png"
+                alt=""
+              />
+              <img
+                v-else-if="item.mas_menu_name == '逛书店'"
+                src="../static/images/icon-sd.png"
+                alt=""
+              />
+              <img
+                v-else-if="item.mas_menu_name == '见大咖'"
+                src="../static/images/icon-dk.png"
+                alt=""
+              />
+              <img
+                v-else-if="item.mas_menu_name == '学案例'"
+                src="../static/images/icon-al.png"
+                alt=""
+              />
+              <img
+                v-else-if="item.mas_menu_name == '淘资讯'"
+                src="../static/images/icon-tzx.png"
+                alt=""
+              />
+              <img v-else src="../static/images/icon-zt.png" alt="" />
             </dt>
-            <dd>听课程</dd>
-          </dl>
-          <dl class="item-column" @click="tabsFn(2)">
-            <dt>
-              <img src="../static/images/icon-al.png" alt="" />
-            </dt>
-            <dd>学案例</dd>
-          </dl>
-          <dl class="item-column" @click="tabsFn(1)">
-            <dt>
-              <img src="../static/images/icon-way.png" alt="" />
-            </dt>
-            <dd>找方法</dd>
-          </dl>
-          <dl class="item-column" @click="tabsFn(3)">
-            <dt>
-              <img src="../static/images/icon-dk.png" alt="" />
-            </dt>
-            <dd>见大咖</dd>
-          </dl>
-          <dl class="item-column" @click="tabsFn(4)">
-            <dt>
-              <img src="../static/images/icon-zz.png" alt="" />
-            </dt>
-            <dd>读杂志</dd>
-          </dl>
-          <dl class="item-column" @click="tabsFn(6)">
-            <dt>
-              <img src="../static/images/icon-tzx.png" alt="" />
-            </dt>
-            <dd>淘资讯</dd>
-          </dl>
-          <dl class="item-column" @click="tabsFn(5)">
-            <dt>
-              <img src="../static/images/icon-sd.png" alt="" />
-            </dt>
-            <dd>逛书店</dd>
-          </dl>
-          <dl class="item-column" @click="tabsFn(7)">
-            <dt>
-              <img src="../static/images/icon-zt.png" alt="" />
-            </dt>
-            <dd>看专题</dd>
+            <dd>{{ item.mas_menu_name }}</dd>
           </dl>
         </div>
         <div class="activity">
@@ -106,57 +104,40 @@
         </div>
       </div>
     </div>
-     <div class="clear"></div>
+    <div class="clear"></div>
     <div class="column-module">
       <div class="module-main">
         <div class="title-box">
           <h2>见大咖</h2>
-          <div class="more" @click="tabsFn(3)">
+          <div class="more" @click="oNitem(indexData.master.masterList.menu)">
             <span>查看更多</span>
             <i class="iconfont icon-juxing"></i>
           </div>
         </div>
         <ul class="module-list">
-          <li>
+          <li
+            v-for="(item, index) in indexData.master.masterTheory.masterlist.slice(0,3)"
+            :key="index"
+            @click="
+              goDetails(
+                indexData.master.masterTheory.menu.mas_menu_url,
+                item.mas_article_id
+              )
+            "
+          >
             <div class="li-l">
-              <h5>
-                <span class="hot">热门</span
-                >财务共享中心的功能定位成美国的航空母舰？
+              <h5 class="twoline">
+                <span class="hot" v-if="index == 0">热门</span
+                >{{ item.mas_article_title }}
               </h5>
               <div class="base">
-                刘勤
-                <span>76条评论</span>
+                {{ item.mas_article_author }}
+                <span>{{ item.commont_num }}条评论</span>
                 1天前
               </div>
             </div>
             <div class="li-r">
-              <img src="" alt="" />
-            </div>
-          </li>
-          <li>
-            <div class="li-l">
-              <h5>财务共享中心的功能定位成美国的航空母舰？</h5>
-              <div class="base">
-                刘勤
-                <span>76条评论</span>
-                1天前
-              </div>
-            </div>
-            <div class="li-r">
-              <img src="" alt="" />
-            </div>
-          </li>
-          <li>
-            <div class="li-l">
-              <h5>财务共享中心的功能定位成美国的航空母舰？</h5>
-              <div class="base">
-                刘勤
-                <span>76条评论</span>
-                1天前
-              </div>
-            </div>
-            <div class="li-r">
-              <img src="" alt="" />
+              <img :src="item.mas_article_img" alt="" />
             </div>
           </li>
         </ul>
@@ -166,41 +147,58 @@
       <div class="module-main">
         <div class="title-box">
           <h2>荐读</h2>
-          <div class="more">
+          <!-- <div class="more">
             <span>查看更多</span>
             <i class="iconfont icon-juxing"></i>
-          </div>
+          </div> -->
         </div>
         <div class="recommend">
-          <dl>
+          <dl
+            @click="
+              goDetails(
+                indexData.recommend[0].mas_article_type_url,
+                indexData.recommend[0].mas_article_id
+              )
+            "
+          >
             <dt>
               <div class="left">
-                <h5>中国石油刘跃珍： 业财融合新模式，财务人员新角色</h5>
+                <h5 class="twoline">
+                  {{ indexData.recommend[0].mas_article_title }}
+                </h5>
                 <div class="base">
-                  <img src="../static/images/time.png" class="time" alt="" />
-                  <span>2022-03-14</span>
-                  <img src="../static/images/chat.png" class="chat" alt="" />
-                  <span>3</span>
+                  <img src="@/static/images/time.png" class="time" alt="" />
+                  <span>{{ indexData.recommend[0].mas_article_addtime }}</span>
+                  <img src="@/static/images/chat.png" class="chat" alt="" />
+                  <span>{{ indexData.recommend[0].commont_num }}</span>
                 </div>
               </div>
               <div class="right">
-                <img src="../static/images/big-yh.png" alt="" />
+                <img src="@/static/images/big-yh.png" alt="" />
               </div>
             </dt>
-            <dd>
-              企业财务人员不仅是企业的价值管理者，而且业财融合新模式正在赋予财务人员更多新角色财务人员不仅是……
+            <dd class="twoline">
+              {{ indexData.recommend[0].mas_article_introduce }}
             </dd>
           </dl>
         </div>
       </div>
       <div class="details">
         <div class="datails-main">
-          <div class="datails-main-l">
+          <div
+            class="datails-main-l"
+            @click="
+              goDetails(
+                indexData.recommend[0].mas_article_type_url,
+                indexData.recommend[0].mas_article_id
+              )
+            "
+          >
             <span>阅读详情</span>
-            <img src="../static/images/arrows-left.png" alt="" />
+            <img src="@/static/images/arrows-left.png" alt="" />
           </div>
           <div class="datails-main-r">
-            <img src="../static/images/small-yh.png" alt="" />
+            <img src="@/static/images/small-yh.png" alt="" />
           </div>
         </div>
       </div>
@@ -209,13 +207,37 @@
       <div class="module-main">
         <div class="title-box">
           <h2>逛书店</h2>
-          <div class="more" @click="tabsFn(5)">
+          <div class="more" @click="oNitem(indexData.bookstoreList.menu)">
             <span>查看更多</span>
             <i class="iconfont icon-juxing"></i>
           </div>
         </div>
         <div class="magazine-list">
-          <dl @click="details(1)">
+          <dl
+            v-for="(bookIt, bookId) in indexData.bookstoreList.books"
+            :key="bookId"
+            @click="
+              goDetails(
+                indexData.bookstoreList.menu.mas_menu_url,
+                bookIt.mas_book_id
+              )
+            "
+          >
+            <dt>
+              <img :src="bookIt.mas_book_img" alt="" />
+              <span class="title twoline" style="height:38px;">{{ bookIt.mas_book_name }}</span>
+            </dt>
+            <dd>
+              <div class="dd-l">
+                <span class="price">¥{{bookIt.mas_book_price}}</span>
+                <span class="original">¥{{bookIt.mas_book_price}}</span>
+              </div>
+              <div class="dd-r">
+                <i class="iconfont icon-xingzhuang"></i>
+              </div>
+            </dd>
+          </dl>
+          <!-- <dl @click="details(2)">
             <dt>
               <img src="../static/images/book.png" alt="" />
               <span class="title">2022年第一期 总第第一期20期</span>
@@ -229,52 +251,7 @@
                 <i class="iconfont icon-xingzhuang"></i>
               </div>
             </dd>
-          </dl>
-          <dl @click="details(2)">
-            <dt>
-              <img src="../static/images/book.png" alt="" />
-              <span class="title">2022年第一期 总第第一期20期</span>
-            </dt>
-            <dd>
-              <div class="dd-l">
-                <span class="price">¥43.5</span>
-                <span class="original">¥43.5</span>
-              </div>
-              <div class="dd-r">
-                <i class="iconfont icon-xingzhuang"></i>
-              </div>
-            </dd>
-          </dl>
-          <dl @click="details(3)">
-            <dt>
-              <img src="../static/images/book.png" alt="" />
-              <span class="title">2022年第一期 总第第一期20期</span>
-            </dt>
-            <dd>
-              <div class="dd-l">
-                <span class="price">¥43.5</span>
-                <span class="original">¥43.5</span>
-              </div>
-              <div class="dd-r">
-                <i class="iconfont icon-xingzhuang"></i>
-              </div>
-            </dd>
-          </dl>
-          <dl @click="details(4)">
-            <dt>
-              <img src="../static/images/book.png" alt="" />
-              <span class="title">2022年第一期 总第第一期20期</span>
-            </dt>
-            <dd>
-              <div class="dd-l">
-                <span class="price">¥43.5</span>
-                <span class="original">¥43.5</span>
-              </div>
-              <div class="dd-r">
-                <i class="iconfont icon-xingzhuang"></i>
-              </div>
-            </dd>
-          </dl>
+          </dl> -->
         </div>
       </div>
     </div>
@@ -320,7 +297,7 @@
         </li>
       </ul>
     </div>
-    <Footer/>
+    <Footer />
   </div>
 </template>
 
@@ -331,10 +308,8 @@ export default {
   layout: "not",
   data() {
     return {
-      // active: 2,
-      // tabs: ["活动", "课程"],
-      // current: 0,
-      // show: false, //是否展示首页列表弹框
+      indexData: "", //首页接口获取数据
+      tabList: [], //菜单列表
     };
   },
   head() {
@@ -356,89 +331,51 @@ export default {
       ],
     };
   },
-  computed: {
-    // ...mapState(['userName'])
-    ...mapState({
-      password: (state) => state.user.password,
-    }),
-  },
+  // computed: {
+  //   // ...mapState(['userName'])
+  //   ...mapState({
+  //     password: (state) => state.user.password,
+  //   }),
+  // },
   async asyncData({ $axios, route, store, env, params, query, error }) {
-    // let res = await getSliders($axios);
-    //  let res =await $axios.get('https://v2.chinamas.cn/api/slider/getSliders');
-    // console.log(res.data.list);
-    // asyncData 中没有this
-    // return { list: res.list };
-    // let timestamp = Date.parse(new Date());
-    // let sign = md5(timestamp + store.state.secretKey);
-    // let res = await $axios.notNeedlogin({
-    //   // sign: sign,
-    //   // timespan: timestamp,
-    //   className: "HomeController",
-    //   classMethod: "home",
-    // });
-    // if (res.bol) {
-    //   return { indexData: res.data };
-    // }
+    let [resA, resB] = await Promise.all([
+      $axios.notNeedlogin({
+        className: "HomeController",
+        classMethod: "home",
+      }),
+      $axios.notNeedlogin({
+        className: "NavigationController",
+        classMethod: "getLeftNavigation",
+      }),
+    ]);
+    return { indexData: resA.data, tabList: resB.data };
   },
-  created() {
-  },
-  mounted() {
-    // 开启滚动监听
-    window.addEventListener("scroll", this.handleScroll);
-  },
+  created() {},
+  mounted() {},
   methods: {
-    ...mapMutations({
-      changePassword: "user/changePassword",
-    }),
-    //点击tabs
-    tabsFn(index) {
-      this.$store.commit("setTabIndex", index);
-      if (index == 0) {
-        this.$router.push({
-          name: "index",
-        });
-      } else if (index == 1) {
-        this.$router.push({
-          name: "zff",
-        });
-      } else if (index == 2) {
-        this.$router.push({
-          name: "xal",
-        });
-      } else if (index == 3) {
-        this.$router.push({
-          name: "jdk",
-        });
-      } else if (index == 4) {
-        this.$router.push({
-          name: "zz",
-        });
-      } else if (index == 5) {
-        this.$router.push({
-          name: "gsd",
-        });
-      } else if (index == 6) {
-        this.$router.push({
-          name: "tzx",
-        });
-      } else if (index == 7) {
-        this.$router.push({
-          name: "kzt",
-        });
-      }
-    },
-    //点击到详情
-    details(id) {
-      console.log(id, "==");
+    // ...mapMutations({
+    //   changePassword: "user/changePassword",
+    // }),
+
+    //点击每一个栏目
+    oNitem(item) {
+      document.body.scrollTop = 0;
+      this.$store.commit("setSubTabId", item.mas_menu_url);
       this.$router.push({
-        path: `/gsd/${id}`,
-        // name: "",
-        // query: { id: index, type: item },
-        // params: {
-        //   type: item,
-        // },
+        name: item.mas_menu_url,
+        query: {
+          menuId: item.mas_menu_id,
+        },
       });
     },
+    //点击到详情
+    goDetails(url, id) {
+      this.$store.commit("setSubTabId", url);
+      this.$router.push({
+        path: `/${url}/${id}`,
+      });
+    },
+
   },
 };
 </script>

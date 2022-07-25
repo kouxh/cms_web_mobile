@@ -2,7 +2,7 @@ export default {
   /**
    * @description 项目名字
    */
-  platformName: 'MAS官网',
+  platformName: 'MAS官网移动端',
   /**
    * @description token在Cookie中存储的天数，默认7天
    */

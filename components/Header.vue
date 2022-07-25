@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <nuxt-link to="/">
-    <img class="logo" src="../static/images/logo.png" alt="" />
+      <img class="logo" src="../static/images/logo.png" alt="" />
     </nuxt-link>
     <div class="search-box">
       <van-search
@@ -18,14 +18,16 @@
       </van-search>
       <i class="iconfont icon-icon-sousuo" @click="onSearch"></i>
     </div>
-    <!-- <img class="photo" src="" alt="" /> -->
-    <span class="login">登录</span>
+    <img class="photo" src="@/static/images/user-photo.png" alt="" />
+    <!-- <span class="login">登录</span> -->
     <i class="iconfont icon-icon-liebiao" @click="showPopup"></i>
     <!-- 首页列表 -->
     <van-popup v-model="show" position="right" :style="{ height: '100%' }">
       <div class="popup-index">
         <div class="header">
-          <img class="logo" src="../static/images/logo.png" alt="" />
+          <nuxt-link to="/">
+            <img class="logo" src="../static/images/logo.png" alt="" />
+          </nuxt-link>
           <div class="search-box">
             <van-search
               v-model="searchValue"
@@ -91,13 +93,57 @@
         <div class="channel-module two">
           <div class="title">热门频道</div>
           <div class="content">
-            <dl class="item">
+            <dl
+              class="item"
+              v-for="(item, index) in tabList"
+              :key="index"
+              @click="oNitem(index, item)"
+            >
               <dt>
-                <img src="../static/images/tkt.png" alt="" />
+                <img
+                  v-if="item.mas_menu_name == '找方法'"
+                  src="../static/images/zff.png"
+                  alt=""
+                />
+                <img
+                  v-else-if="item.mas_menu_name == '大咖说'"
+                  src="../static/images/kzt.png"
+                  alt=""
+                />
+                <img
+                  v-else-if="item.mas_menu_name == '读杂志'"
+                  src="../static/images/dzz.png"
+                  alt=""
+                />
+                <img
+                  v-else-if="item.mas_menu_name == '逛书店'"
+                  src="../static/images/gsd.png"
+                  alt=""
+                />
+                <img
+                  v-else-if="item.mas_menu_name == '见大咖'"
+                  src="../static/images/jdk.png"
+                  alt=""
+                />
+                <img
+                  v-else-if="item.mas_menu_name == '学案例'"
+                  src="../static/images/xal.png"
+                  alt=""
+                />
+                <img
+                  v-else-if="item.mas_menu_name == '淘资讯'"
+                  src="../static/images/tzx.png"
+                  alt=""
+                />
+                <img
+                  v-else
+                  src="../static/images/kzt.png"
+                  alt=""
+                />
               </dt>
-              <dd>听课程</dd>
+              <dd>{{ item.mas_menu_name }}</dd>
             </dl>
-            <dl class="item">
+            <!-- <dl class="item">
               <dt>
                 <img src="../static/images/xal.png" alt="" />
               </dt>
@@ -138,7 +184,7 @@
                 <img src="../static/images/kzt.png" alt="" />
               </dt>
               <dd>看专题</dd>
-            </dl>
+            </dl> -->
           </div>
         </div>
       </div>
@@ -146,42 +192,22 @@
   </div>
 </template>
 <script>
-const meanList = [
-  {
-    url: "index",
-    title: "首页",
-  },
-  {
-    url: "qyfw",
-    title: "企业服务",
-  },
-  {
-    url: "dy",
-    title: "订阅",
-  },
-  {
-    url: "ktyj",
-    title: "课题研究",
-  },
-  {
-    url: "activity",
-    title: "活动",
-  },
-  {
-    url: "hyfw",
-    title: "会员服务",
-  },
-  {
-    url: "zzfw",
-    title: "作者服务",
-  },
-];
 export default {
   data() {
     return {
       searchValue: "",
       show: false, //是否展示首页列表弹框
+      tabList: [], //导航栏列表
     };
+  },
+  async fetch() {
+    let res = await this.$axios.notNeedlogin({
+      className: "NavigationController",
+      classMethod: "getLeftNavigation",
+    });
+    if (res.bol) {
+      this.tabList = res.data;
+    }
   },
   created() {},
   mounted() {},
@@ -194,6 +220,18 @@ export default {
     //首页列表弹框
     showPopup() {
       this.show = true;
+    },
+    //点击每一个栏目
+    oNitem(index, item) {
+      this.show=false;
+      document.body.scrollTop = 0;
+      this.$store.commit("setSubTabId", item.mas_menu_url);
+      this.$router.push({
+        name: item.mas_menu_url,
+        query: {
+          menuId: item.mas_menu_id,
+        },
+      });
     },
   },
 };
@@ -235,12 +273,13 @@ export default {
   .photo {
     width: 24px;
     height: 24px;
+    border-radius: 50%;
     border: 1px solid #ffffff;
     box-shadow: 0px 2px 4px 0px rgba(0, 12, 73, 0.08);
     margin: 0px 20px;
   }
-  .login{
-    margin: 0px 16px ;
+  .login {
+    margin: 0px 16px;
     font-size: 16px;
     font-family: PingFangSC, PingFangSC-Medium;
     font-weight: 500;

@@ -72,11 +72,11 @@ export default {
   },
   methods: {
     //点击立即订阅
-    buyFn() {
-      this.$router.push({
-        name: "subscription-pay",
-      });
-    },
+    // buyFn() {
+    //   this.$router.push({
+    //     name: "subscription-pay",
+    //   });
+    // },
     //点击视频播放按钮
     handlePlay() {
       this.$refs.movie.play();
