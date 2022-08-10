@@ -1,8 +1,10 @@
 // 通过终端设备显示不同路由(移动、pc)
 export default function ({ isServer, req, redirect, route }) {
   //不同项目不同端口
-  let pcOrigin = 'http://localhost:3000'
-  let mobileOrigin = 'http://localhost:3001'
+  // let pcOrigin = 'http://localhost:3000'
+  // let mobileOrigin = 'http://localhost:3001'
+  let pcOrigin = 'https://v2.chinamas.cn'
+  let mobileOrigin = 'https://app.chinamas.cn'
   let isMobile = (ua) => {
     return !!ua.match(/AppleWebKit.*Mobile.*/)
   }

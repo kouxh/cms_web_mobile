@@ -2,8 +2,10 @@
 import Vue from "vue";
 // import 'vant/lib/index.css';
 import {
-  Button, Icon, Search, Tab, Tabs, Popup, Swipe, SwipeItem, List,Loading
+  Button, Icon, Search, Tab, Tabs, Popup, Swipe, SwipeItem, List, Loading,
+  Checkbox, CheckboxGroup, Toast
 } from "vant";
+Vue.use(Toast);
 Vue.use(Button);
 Vue.use(Icon);
 Vue.use(Search);
@@ -14,3 +16,6 @@ Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(List);
 Vue.use(Loading);
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
+

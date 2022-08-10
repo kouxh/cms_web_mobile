@@ -4,19 +4,22 @@
   .page-header {
     width: 100%;
     background-color: #fff;
+
     .book-type {
       height: 50px;
       width: 345px;
       margin: 0 auto;
+
       .book-type-main {
         // padding: 0px 15px;
         height: 100%;
         display: flex;
         align-items: center;
-        displey:-webkit-flex;
-        -webkit-flex-flow:row nowrap; //设置排列方式为横向排列，并且超出元素不换行
-        flex-flow:row nowrap;
+        displey: -webkit-flex;
+        -webkit-flex-flow: row nowrap; //设置排列方式为横向排列，并且超出元素不换行
+        flex-flow: row nowrap;
         overflow-x: auto;
+
         li {
           min-width: 68px;
           height: 28px;
@@ -47,9 +50,11 @@
     }
 
   }
+
   ::-webkit-scrollbar {
     display: none;
   }
+
   .book-list {
     margin-top: 10px;
     background: #ffffff;
@@ -70,9 +75,11 @@
           text-align: justify;
           color: #db6b3a;
           line-height: 20px;
-          .iconfont{
-            font-size: 8px;
-            padding-top: 1px;
+          display: flex;
+          align-items: center;
+
+          .icon {
+            margin-left: 4px;
           }
         }
       }
@@ -85,14 +92,17 @@
         dl {
           width: 165px;
           padding-bottom: 20px;
+
           dt {
             img {
               width: 165px;
               height: 165px;
             }
           }
+
           dd {
             padding-top: 8px;
+
             .title {
               font-size: 14px;
               font-weight: 500;
@@ -100,14 +110,17 @@
               color: #333333;
               line-height: 20px;
             }
+
             p {
               display: none;
             }
+
             .base {
               display: flex;
               align-items: center;
               justify-content: space-between;
               padding-top: 16px;
+
               .dd-l {
                 display: flex;
                 align-items: center;
@@ -130,13 +143,6 @@
                   text-decoration: line-through;
                 }
               }
-
-              .dd-r {
-                .icon-gouwucheman {
-                  color: #ed6d38;
-                }
-
-              }
             }
 
           }
@@ -148,6 +154,7 @@
           width: 100%;
           display: flex;
           justify-content: space-between;
+
           dt {
             img {
               width: 140px !important;
@@ -158,6 +165,7 @@
           dd {
             width: 188px;
             padding-top: 4px;
+
             .title {
               letter-spacing: 1px;
             }
@@ -170,7 +178,8 @@
               line-height: 12px;
               padding-top: 12px;
             }
-            .base{
+
+            .base {
               padding-top: 24px;
             }
           }

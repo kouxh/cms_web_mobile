@@ -27,8 +27,8 @@ export default {
       {
         src: "/js/flexible.js", type: 'text/javascript', charset: 'utf-8'
       },
-      // { src: '/js/jquery.js' },
-      // { src: "https://ssl.captcha.qq.com/TCaptcha.js" },
+      { src: '/js/jquery.js' },
+      { src: "https://ssl.captcha.qq.com/TCaptcha.js" },
       // { src: '/js/wxLogin.js' }
       // { src: '/js/lazyload.js' },
     ]

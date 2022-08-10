@@ -18,10 +18,10 @@
         >
       </swiper>
       <div class="tabs-next" @click="nextFn()" v-show="nextIcon">
-        <i class="iconfont icon-icon-xiangyouhuadong"></i>
+        <svg t="1660017357800" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4555" width="16" height="16"><path d="M776.768 512l-314.304 302.72a46.336 46.336 0 0 0 0 67.328c19.264 18.56 50.56 18.56 69.824 0l349.248-336.384a46.336 46.336 0 0 0 0-67.328L532.288 141.952a50.752 50.752 0 0 0-69.824 0 46.336 46.336 0 0 0 0 67.264L776.768 512z" fill="#666666" p-id="4556"></path></svg>
       </div>
       <div class="tabs-pre" @click="preFn()" v-show="currentClickNumber > 0">
-        <i class="iconfont icon-icon-xiangyouhuadong"></i>
+       <svg t="1660017357800" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4555" width="16" height="16"><path d="M776.768 512l-314.304 302.72a46.336 46.336 0 0 0 0 67.328c19.264 18.56 50.56 18.56 69.824 0l349.248-336.384a46.336 46.336 0 0 0 0-67.328L532.288 141.952a50.752 50.752 0 0 0-69.824 0 46.336 46.336 0 0 0 0 67.264L776.768 512z" fill="#666666" p-id="4556"></path></svg>
       </div>
     </div>
   </div>

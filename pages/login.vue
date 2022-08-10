@@ -714,7 +714,7 @@ export default {
 .login-wrapper {
   width: 100%;
   height: 100%;
-  background-image: url(../static/images/login/login-bg.png);
+  // background-image: url(../static/images/login/login-bg.png);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -902,7 +902,7 @@ export default {
         .qrcode-bg {
           width: 200px;
           height: 200px;
-          background-image: url(../static/images/login/qrcode.png);
+          // background-image: url(../static/images/login/qrcode.png);
           background-size: cover;
           background-position: center center;
           background-repeat: no-repeat;

@@ -16,11 +16,11 @@
         <!-- <i class="iconfont icon-icon-sousuo"></i> -->
         <!-- </div> -->
       </van-search>
-      <i class="iconfont icon-icon-sousuo" @click="onSearch"></i>
+      <svg @click="onSearch" t="1660024471536" class="icon icon-icon-sousuo" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6067" width="24" height="24"><path d="M495.537231 763.273846a267.736615 267.736615 0 1 0 0-535.473231 267.736615 267.736615 0 0 0 0 535.512616z m0-48.64a219.057231 219.057231 0 1 1 0-438.153846 219.057231 219.057231 0 0 1 0 438.153846z" fill="#999999" p-id="6068"></path><path d="M645.789538 670.129231a24.339692 24.339692 0 0 1 34.422154 0l103.266462 103.266461a24.339692 24.339692 0 1 1-34.422154 34.422154l-103.266462-103.266461a24.339692 24.339692 0 0 1 0-34.422154z m34.422154 34.422154a24.339692 24.339692 0 0 0 0-34.422154l103.266462 103.266461a24.339692 24.339692 0 1 0-34.422154 34.422154l-103.266462-103.266461a24.339692 24.339692 0 0 0 34.422154 0z" fill="#999999" p-id="6069"></path></svg>
     </div>
     <img class="photo" src="@/static/images/user-photo.png" alt="" />
     <!-- <span class="login">登录</span> -->
-    <i class="iconfont icon-icon-liebiao" @click="showPopup"></i>
+    <svg t="1660024181940" class="icon"  @click="showPopup" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5563" width="36" height="36"><path d="M284.444444 483.555556h455.111112a28.444444 28.444444 0 0 1 0 56.888888H284.444444a28.444444 28.444444 0 0 1 0-56.888888z m0 170.666666h455.111112a28.444444 28.444444 0 0 1 0 56.888889H284.444444a28.444444 28.444444 0 0 1 0-56.888889z m0-341.333333h455.111112a28.444444 28.444444 0 0 1 0 56.888889H284.444444a28.444444 28.444444 0 0 1 0-56.888889z" fill="#333333" p-id="5564"></path></svg>
     <!-- 首页列表 -->
     <van-popup v-model="show" position="right" :style="{ height: '100%' }">
       <div class="popup-index">
@@ -41,13 +41,10 @@
               <!-- <i class="iconfont icon-icon-sousuo"></i> -->
               <!-- </div> -->
             </van-search>
-            <i class="iconfont icon-icon-sousuo" @click="onSearch"></i>
+             <svg @click="onSearch" t="1660024471536" class="icon icon-icon-sousuo" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6067" width="24" height="24"><path d="M495.537231 763.273846a267.736615 267.736615 0 1 0 0-535.473231 267.736615 267.736615 0 0 0 0 535.512616z m0-48.64a219.057231 219.057231 0 1 1 0-438.153846 219.057231 219.057231 0 0 1 0 438.153846z" fill="#999999" p-id="6068"></path><path d="M645.789538 670.129231a24.339692 24.339692 0 0 1 34.422154 0l103.266462 103.266461a24.339692 24.339692 0 1 1-34.422154 34.422154l-103.266462-103.266461a24.339692 24.339692 0 0 1 0-34.422154z m34.422154 34.422154a24.339692 24.339692 0 0 0 0-34.422154l103.266462 103.266461a24.339692 24.339692 0 1 0-34.422154 34.422154l-103.266462-103.266461a24.339692 24.339692 0 0 0 34.422154 0z" fill="#999999" p-id="6069"></path></svg>
           </div>
           <img class="photo" src="" alt="" />
-          <i
-            class="iconfont icon-icon-liebiaozhankai"
-            @click="show = !show"
-          ></i>
+          <svg @click="show = !show" t="1660024260031" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5731" width="36" height="36"><path d="M361.443556 321.223111l160.910222 160.881778 160.910222-160.881778a28.444444 28.444444 0 0 1 37.546667-2.360889l2.673777 2.360889a28.444444 28.444444 0 0 1 0 40.220445l-160.881777 160.910222 160.881777 160.910222a28.444444 28.444444 0 1 1-40.220444 40.220444l-160.910222-160.881777-160.910222 160.881777a28.444444 28.444444 0 0 1-37.546667 2.360889l-2.673778-2.360889a28.444444 28.444444 0 0 1 0-40.220444l160.881778-160.910222-160.881778-160.910222a28.444444 28.444444 0 0 1 40.220445-40.220445z" fill="#333333" p-id="5732"></path></svg>
         </div>
         <div class="channel-module">
           <div class="title">热门频道</div>
@@ -255,6 +252,7 @@ export default {
     background: #f0f2f9;
     border-radius: 18px;
     position: relative;
+
     .van-search {
       padding: 0px;
     }
@@ -285,14 +283,6 @@ export default {
     font-weight: 500;
     color: #db6b3a;
     line-height: 22px;
-  }
-
-  .icon-icon-liebiao {
-    font-size: 36px;
-  }
-
-  .icon-icon-liebiaozhankai {
-    font-size: 36px;
   }
 }
 .popup-index {
